@@ -54,4 +54,4 @@ $
 # Example
 
 # Authors
-*Ghassen Boughammoura <github.com/Ghassen-bgh>
+*Ghassen Boughammoura <[github.com/Ghassen-bgh]>(https://github.com/Ghassen-bgh)
