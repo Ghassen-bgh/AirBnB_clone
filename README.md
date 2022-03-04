@@ -32,11 +32,10 @@ $
 It can be also used in non-interactive mode:
 ```bash
 $ echo "help" | ./console.py
-(hbnb)
-
+(hbnb) 
 Documented commands (type help <topic>):
 ========================================
-EOF  help  quit
+EOF  all  create  destroy  help  quit  show  update
 (hbnb) 
 $
 $ cat test_help
