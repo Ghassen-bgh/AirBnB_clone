@@ -5,7 +5,6 @@ from models.base_model import BaseModel
 from datetime import datetime
 import pep8
 import uuid
-import models
 import os
 import json
 
@@ -84,7 +83,7 @@ class Test_BaseModel(unittest.TestCase):
         self.obj.save()
         dict_to_load = {}
         with open("file.json", 'r') as f:
-                dict_to_load = json.loads(f.read())
+            dict_to_load = json.loads(f.read())
         self.assertDictEqual(
             self.obj.to_dict(), dict_to_load['BaseModel.' + self.obj.id])
 

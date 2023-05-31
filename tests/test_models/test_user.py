@@ -84,7 +84,7 @@ class Test_User(unittest.TestCase):
         self.obj.save()
         dict_to_load = {}
         with open("file.json", 'r') as f:
-                dict_to_load = json.loads(f.read())
+            dict_to_load = json.loads(f.read())
         self.assertDictEqual(
             self.obj.to_dict(), dict_to_load['User.' + self.obj.id])
 
