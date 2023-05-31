@@ -8,8 +8,10 @@ class State(BaseModel):
     """
     Class State
     """
-    name = ""
-
     def __init__(self, *args, **kwargs):
-        """ Ctor of State """
-        super().__init__(**kwargs)
+        self.name = ""
+        super().__init__(*args, **kwargs)
+
+    def __str__(self):
+        return "[{}] ({}) {}".format(
+            self.__class__.__name__, self.id, self.name)
