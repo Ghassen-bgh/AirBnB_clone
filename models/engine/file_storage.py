@@ -32,11 +32,11 @@ class FileStorage:
         return self.__objects
 
     def new(self, obj):
-        """" Adds a new object to the dictionary objects """
+        """ Adds a new object to the dictionary objects """
         self.__objects[obj.__class__.__name__+"."+obj.id] = obj
 
     def save(self):
-        """ Saves all the dictionary objects to a json file """
+        """Saves all the dictionary objects to a json file """
         new_dict = {}
         for key, obj in self.__objects.items():
             new_dict[key] = obj.to_dict()
