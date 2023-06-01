@@ -126,3 +126,40 @@ class Test_BaseModel(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             self.assertFalse(HBNBCommand().onecmd("update BaseModel 1234"))
         self.assertEqual(f.getvalue(), "** no instance found **\n")
+    
+    def test_all(self):
+        """ Test for all command. """
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("all BaseModel"))
+        self.assertEqual(len(f.getvalue()), 2)
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("all"))
+        self.assertEqual(len(f.getvalue()), 2)
+
+    def test_count(self):
+        """ Test for count command. """
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("BaseModel.count()"))
+        self.assertEqual(f.getvalue(), "0\n")
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("BaseModel.count"))
+        self.assertEqual(f.getvalue(), "0\n")
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("BaseModel.count('1234')"))
+        self.assertEqual(f.getvalue(), "0\n")
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("BaseModel.count(1234)"))
+        self.assertEqual(f.getvalue(), "0\n")
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("BaseModel.count([1234])"))
+        self.assertEqual(f.getvalue(), "0\n")
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("BaseModel.count({1234})"))
+        self.assertEqual(f.getvalue(), "0\n")
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("BaseModel.count({'1234'})"))
+        self.assertEqual(f.getvalue(), "0\n")
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("BaseModel.count({'1234': 1234})"))
+        self.assertEqual(f.getvalue(), "0\n")
+
