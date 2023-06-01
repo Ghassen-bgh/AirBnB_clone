@@ -12,7 +12,7 @@ class BaseModel:
     """
     def __init__(self, *args, **kwargs):
         """ Ctor of BaseModel class """
-        if len(kwargs) is not 0:
+        if len(kwargs) != 0:
             for key, value in kwargs.items():
                 if key == "updated_at":
                     d = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")

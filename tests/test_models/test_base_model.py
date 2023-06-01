@@ -1,12 +1,16 @@
 #!/usr/bin/python3
 """Module to make tests"""
 import unittest
-from models.base_model import BaseModel
-from datetime import datetime
-import pep8
-import uuid
 import os
+import uuid
+import pep8
+from datetime import datetime
+from datetime import time
+from models.base_model import BaseModel
+import models
 import json
+
+
 
 
 class Test_BaseModel(unittest.TestCase):
