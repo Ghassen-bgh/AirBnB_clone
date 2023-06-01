@@ -58,6 +58,29 @@ class Test_FileStorage(unittest.TestCase):
         key = obj_BM.__class__.__name__+"."+obj_BM.id
         self.assertDictEqual(
             self.obj_storage.all()[key].to_dict(), obj_BM.to_dict())
+    
+    def test_save(self):
+        """Test save() method"""
+        obj_BM = BaseModel()
+        self.obj_storage.new(obj_BM)
+
+        self.obj_storage.save()
+
+        self.assertTrue(os.path.exists(FileStorage._FileStorage__file_path))
+
+        with open(FileStorage._FileStorage__file_path, 'r') as f:
+            json_data = json.load(f)
+            key = obj_BM.__class__.__name__ + "." + obj_BM.id
+            self.assertIn(key, json_data)
+
+        del self.obj_storage
+
+        self.obj_storage = FileStorage()
+        self.obj_storage.reload()
+
+        self.assertIn(key, self.obj_storage.all())
+        self.assertIsInstance(self.obj_storage.all()[key], BaseModel)
+
 
 if __name__ == "__main__":
     unittest.main()
