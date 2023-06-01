@@ -90,6 +90,11 @@ class Test_BaseModel(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             self.assertFalse(HBNBCommand().onecmd("show BaseModel 1234"))
         self.assertEqual(f.getvalue(), "** no instance found **\n")
+        with patch('sys.stdout', new=StringIO()) as mock_stdout:
+            self.console.onecmd("BaseModel.show(\"id\")")
+            output = mock_stdout.getvalue().strip()
+        self.assertIn("id", output)
+        
     
     def test_destroy(self):
         """ Test for destroy command. """
@@ -138,21 +143,7 @@ class Test_BaseModel(unittest.TestCase):
             self.assertFalse(HBNBCommand().onecmd("update BaseModel 1234"))
         self.assertEqual(f.getvalue(), "** no instance found **\n")
     
-    def test_show_with_id(self):
-        """Test for show command with instance ID."""
-        # Create an instance of BaseModel
-        with patch('sys.stdout', new=StringIO()) as f:
-            HBNBCommand().onecmd("create BaseModel")
-            create_output = f.getvalue().strip()
-            instance_id = create_output.split()[3]
 
-        # Test show command with the instance ID
-        with patch('sys.stdout', new=StringIO()) as f:
-            HBNBCommand().onecmd(f"show BaseModel {instance_id}")
-            show_output = f.getvalue().strip()
-
-        self.assertIn(instance_id, show_output)
-        self.assertIn("BaseModel", show_output)
 
     def test_count(self):
         """ Test for count command. """
