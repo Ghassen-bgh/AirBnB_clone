@@ -210,16 +210,21 @@ class HBNBCommand(cmd.Cmd):
                         return
                 print("** no instance found **")
             if parsed[0] == "update":
-                args = parsed[1][0:-1].split(",")
-                size = len(args)
-                if size != 0 and not len(args[0]):
-                    print("** instance id missing **")
+                args = parsed[1].strip(")").split(",")
+                if len(args) != 3:
+                    print("** invalid format **")
                     return
-                if size == 1:
-                    print("** attribute name missing **")
-                    return
-                elif size == 2:
-                    print("** value missing **")
+                class_name = text[0]
+                instance_id = args[0].strip("'\"")
+                attribute_name = args[1].strip("'\"")
+                attribute_value = args[2].strip("'\"")
+                key = class_name + "." + instance_id
+                if key in db:
+                    instance = db[key]
+                    setattr(instance, attribute_name, attribute_value)
+                    instance.save()
+                else:
+                    print("** no instance found **")
                     return
                 k = text[0] + "." + args[0]
                 if k in db:
