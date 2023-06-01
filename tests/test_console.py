@@ -121,6 +121,10 @@ class Test_BaseModel(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             self.assertFalse(HBNBCommand().onecmd("all BaseModel 1234"))
         self.assertEqual(f.getvalue(), "** class doesn't exist **\n")
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.console.onecmd("BaseModel.all()")
+            output = f.getvalue().strip()
+        self.assertIn("BaseModel", output)
 
     def test_update(self):
         """ Test for update command. """
